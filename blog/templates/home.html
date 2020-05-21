@@ -1,0 +1,102 @@
+{% load static %}
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+    <style>
+        @font-face { font-family: 'DWImpactamin';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/DWImpactamin.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face { font-family: 'JSDongkang-Regular';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/JSDongkang-RegularA1.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        #td1 {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+        #td2 {
+            padding: 30px 30px 30px 30px;
+        }
+        #title {
+            font-weight: bold;
+            font-family: 'JSDongkang-Regular';
+        }
+        #img {
+            position: relative;
+        }
+        #text {
+            left: 40%; width: 450px; bottom: 38%;
+            font-size: 3em; 
+            position: absolute;
+            opacity: 0.7;
+            font-family: 'DWImpactamin';
+        }
+        #line {
+            margin-bottom: 20px;
+            border: 3px solid #F3D0F7;
+            border-radius: 20px;
+            font-family: 'JSDongkang-Regular';
+        }
+        h3 {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="img">
+        <img src="{% static 'sky4.jpg' %}" alt="sky" width="100%" height="190px">
+        <div id="text">
+            Minchae's daily life    
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#E8BCE9; font-family: 'DWImpactamin';">
+        <a class="navbar-brand" href="#">Blog</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'new' %}">Write <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'portfolio' %}">portfolio</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <table width="100%">
+          <tr>
+              <td id="td1" bgcolor="#F8E8F8" align="center">
+                <img src="{% static 'toy.jpeg' %}" alt="toystory" width="200" height="320" align="center">
+                <br><br>
+                <p align="center" id="title">민채의 블로그</p>
+                <p align="center" style="font-family: 'JSDongkang-Regular';">포스팅 개수 : {{count}}</p>
+              </td>
+              <td align="center" id="td2" bgcolor="#FBFBF7">
+                    {% for blog in blogs.all %}
+                    <div id="line">
+                        <h3 style="padding-top: 7px;">{{blog.title}}</h1>
+                        <p style="color: #757576;">{{blog.pub_date}}</p>
+                        <p>{{blog.summary}}</p>
+                        <a href="{%url 'detail' blog.id%}">more</a>
+                        <br><br><br>
+                    </div>
+                    {%endfor%}
+              </td>
+          </tr>
+      </table>
+
+</body>
